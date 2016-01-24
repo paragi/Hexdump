@@ -24,10 +24,8 @@ var Hexdump = {
 		
 		for( var i = 0; i < 4; i++ ) {
 			if( i < chunk.length ) {
-				dumped += Hexdump.to_hex( chunk.charCodeAt( i ) );
-			} else {
-				dumped += "..";
-			}
+				dumped += Hexdump.to_hex( chunk.charCodeAt( i ) )+" ";
+			} 
 		}
 		
 		return dumped;
@@ -40,13 +38,11 @@ var Hexdump = {
 		for( var i = 0; i < 4; i++ ) {
 			if( i < chunks.length ) {
 				dumped += Hexdump.dump_chunk( chunks[i] );
-			} else {
-				dumped += "........";
 			}
 			dumped += " ";
 		}
 		
-		dumped += "    " + block.replace( /[\x00-\x1F]/g, "." );
+		dumped += "[    " + block.replace( /[\x00-\x1F]/g, "." )+']';
 		
 		return dumped;
 	},
@@ -56,7 +52,7 @@ var Hexdump = {
 		
 		var blocks = s.match( /.{1,16}/g );
 		for( var block in blocks ) {
-			dumped += Hexdump.dump_block( blocks[block] ) + "\n";
+			dumped += Hexdump.dump_block( blocks[block] ) + "\n<br>";
 		}
 		
 		return dumped;
